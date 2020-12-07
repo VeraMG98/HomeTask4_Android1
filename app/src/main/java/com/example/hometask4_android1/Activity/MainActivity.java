@@ -9,14 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.hometask4_android1.Adapters.FirstAdapter;
-import com.example.hometask4_android1.Notes;
+import com.example.hometask4_android1.Model.Notes;
 import com.example.hometask4_android1.R;
 
 import java.util.ArrayList;
@@ -43,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements FirstAdapter.Item
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            list.add(new Notes(i + " Note", "Date"));
+            list.add(new Notes("Title " + i,i + " Note", "Date"));
         }
         firstAdapter = new FirstAdapter(list, this);
         recyclerView.setAdapter(firstAdapter);

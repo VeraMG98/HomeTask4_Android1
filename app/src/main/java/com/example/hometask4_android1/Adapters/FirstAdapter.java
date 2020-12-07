@@ -10,13 +10,11 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hometask4_android1.Notes;
+import com.example.hometask4_android1.Model.Notes;
 import com.example.hometask4_android1.R;
 
-import java.util.Collections;
 import java.util.List;
 
 public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHolder> {
@@ -53,14 +51,14 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
     }
 
     class FirstViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
-        TextView note;
-        TextView date;
+        TextView title, note, date;
         ImageView buttonMenu;
         Notes notes;
 
         public FirstViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            title = itemView.findViewById(R.id.title_note);
             note = itemView.findViewById(R.id.name);
             date = itemView.findViewById(R.id.date_item_list);
             buttonMenu = itemView.findViewById(R.id.image_item_menu);
@@ -74,6 +72,7 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
 
         public void onBind(Notes notes) {
             this.notes = notes;
+            title.setText(notes.getTitle());
             note.setText(notes.getNote());
             date.setText(notes.getDate());
         }
@@ -87,16 +86,12 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-
-                case R.id.delete:
-                    list.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                    return true;
-
-                default:
-                    return false;
+            if (item.getItemId() == R.id.delete) {
+                list.remove(getAdapterPosition());
+                notifyItemRemoved(getAdapterPosition());
+                return true;
             }
+            return false;
         }
     }
 

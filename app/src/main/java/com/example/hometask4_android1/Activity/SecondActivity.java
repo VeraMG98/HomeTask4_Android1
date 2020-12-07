@@ -11,7 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.hometask4_android1.Notes;
+import com.example.hometask4_android1.Model.Notes;
 import com.example.hometask4_android1.R;
 
 import java.util.Calendar;
@@ -19,7 +19,7 @@ import java.util.Calendar;
 public class SecondActivity extends AppCompatActivity {
     public Calendar date;
     public static String dateText;
-    public EditText editText;
+    public EditText editText, editText2;
     public TextView textViewDate;
     public static String KEY = "key";
 
@@ -32,12 +32,14 @@ public class SecondActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             Notes notes = (Notes) intent.getSerializableExtra(MainActivity.KEY);
+            editText2.setText(notes.getTitle());
             editText.setText(notes.getNote());
             textViewDate.setText(notes.getDate());
         }
     }
 
     private void init() {
+        editText2 = findViewById(R.id.edit_title);
         editText = findViewById(R.id.edit_theme);
         textViewDate = findViewById(R.id.text_for_date);
         date = Calendar.getInstance();
@@ -45,7 +47,8 @@ public class SecondActivity extends AppCompatActivity {
 
     public void onClickButtonOkSecondActivity(View view) {
         Intent intent = new Intent();
-        Notes notes = new Notes(editText.getText().toString(),
+        Notes notes = new Notes(editText2.getText().toString(),
+                editText.getText().toString(),
                 textViewDate.getText().toString());
         intent.putExtra(KEY, notes);
         setResult(RESULT_OK, intent);

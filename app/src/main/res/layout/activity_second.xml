@@ -6,37 +6,53 @@
     android:padding="25dp"
     tools:context=".Activity.SecondActivity">
 
-    <TextView
-        android:id="@+id/text_for_date"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <LinearLayout
         android:id="@+id/edit_theme_ly"
-        android:layout_below="@id/text_for_date"
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edit_theme"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"/>
+
+
+            <EditText
+                android:id="@+id/edit_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/calendar_up"
             android:layout_width="0dp"
             android:src="@drawable/calengar"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
             android:onClick="onClickCalendarIcon"/>
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_for_date"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/edit_theme_ly"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
