@@ -98,11 +98,6 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
     public void setOnClickListener(ItemClickListener clickListener) {
         this.listener = clickListener;
     }
-
-    public interface ItemClickListener {
-        void onItemClick(Notes notes, int position);
-    }
-
 }
 
 

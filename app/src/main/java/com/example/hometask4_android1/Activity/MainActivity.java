@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.hometask4_android1.Adapters.FirstAdapter;
+import com.example.hometask4_android1.Adapters.ItemClickListener;
 import com.example.hometask4_android1.Model.Notes;
 import com.example.hometask4_android1.R;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FirstAdapter.ItemClickListener{
+public class MainActivity extends AppCompatActivity implements ItemClickListener {
     public RecyclerView recyclerView;
     public FirstAdapter firstAdapter;
     public List<Notes> list;
