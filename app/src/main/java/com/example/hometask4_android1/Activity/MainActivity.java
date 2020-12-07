@@ -1,4 +1,4 @@
-package com.example.hometask4_android1;
+package com.example.hometask4_android1.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,21 +9,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.hometask4_android1.Adapters.FirstAdapter;
+import com.example.hometask4_android1.Notes;
+import com.example.hometask4_android1.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnClickItems {
+public class MainActivity extends AppCompatActivity implements FirstAdapter.ItemClickListener{
     public RecyclerView recyclerView;
     public FirstAdapter firstAdapter;
-    public List<String> list;
-    public Integer positionCurrent = null;
-    public static final String EXTRA_TEXT1 = "text";
+    public List<Notes> list;
+    public static String KEY = "key";
+    public static int REQUEST_CODE = 1;
+    public int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +42,12 @@ public class MainActivity extends AppCompatActivity implements OnClickItems {
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(i + " Add item");
+        for (int i = 0; i < 5; i++) {
+            list.add(new Notes(i + " Note", "Date"));
         }
-        firstAdapter = new FirstAdapter(list, this, this);
+        firstAdapter = new FirstAdapter(list, this);
         recyclerView.setAdapter(firstAdapter);
+        firstAdapter.setOnClickListener(this);
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
     }
 
@@ -56,13 +63,6 @@ public class MainActivity extends AppCompatActivity implements OnClickItems {
             int positionTarget = target.getAdapterPosition();
             Collections.swap(firstAdapter.list, positionDrag, positionTarget);
             firstAdapter.notifyItemMoved(positionDrag, positionTarget);
-
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.this.onClickItems(viewHolder.getAdapterPosition());
-                }
-            });
             return true;
         }
 
@@ -74,21 +74,20 @@ public class MainActivity extends AppCompatActivity implements OnClickItems {
     };
 
     @Override
-    public void onClickItems(int position) {
-        positionCurrent = position;
-        Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra(SecondActivity.EXTRA_TEXT, list.get(position));
-        startActivityForResult(intent, position);
+    public void onItemClick(Notes notes, int position) {
+        this.position = position;
+        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        intent.putExtra(KEY, notes);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == positionCurrent && resultCode == RESULT_OK && data != null) {
-            String text = data.getStringExtra(SecondActivity.EXTRA_TEXT1);
-            firstAdapter.update(requestCode, text);
-        } else {
-            Toast.makeText(this, "fall", Toast.LENGTH_SHORT).show();
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            Notes notes = (Notes) data.getSerializableExtra(SecondActivity.KEY);
+            firstAdapter.setElement(notes, position);
         }
     }
+
 }

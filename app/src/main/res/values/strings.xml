@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">HomeTask4_Android1</string>
+    <string name="app_name">HomeTask4</string>
     <string name="item">Item</string>
     <string name="theme">Theme</string>
+    <string name="date">Date</string>
+    <string name="todo">TODO</string>
+    <string name="delete_element">Delete element</string>
+    <string name="title">Title</string>
+    <string name="edit_element">Edit</string>
 </resources>
