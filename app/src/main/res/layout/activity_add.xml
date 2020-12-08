@@ -10,20 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp">
 
             <ImageView
                 android:id="@+id/back_main"
                 android:src="@drawable/menu_back_main"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:onClick="onClickBackMain"/>
 
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/share_icon"
+                android:src="@drawable/share_icon"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="onClickShareIcon"/>
+
+            <ImageView
+                android:id="@+id/calendar_add_item"
+                android:onClick="onClickCalendarForAddActivity"
+                android:src="@drawable/calengar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/ok_button"
+                android:src="@drawable/add_items_ok"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="onClickButtonAddActivity"/>
+
+        </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
@@ -32,33 +58,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/l1"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
+        <EditText
+            android:id="@+id/edit_new_element"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edit_new_element"
-                android:layout_width="0dp"
-                android:layout_weight="0.9"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/calendar_add_item"
-                android:onClick="onClickCalendarForAddActivity"
-                android:src="@drawable/calengar"
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"/>
 
         <EditText
             android:id="@+id/add_new_note"
+            android:layout_below="@id/edit_new_element"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/l1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -69,18 +77,6 @@
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_save"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:src="@drawable/add_items_ok"
-            android:onClick="onClickButtonAddActivity"
-            android:contentDescription="@string/todo"
             android:layout_alignParentRight="true" />
 
     </RelativeLayout>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hometask4_android1.DB.AppDataBase;
 import com.example.hometask4_android1.Model.Notes;
 import com.example.hometask4_android1.R;
 
@@ -21,8 +22,10 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
     public List<Notes> list;
     public Context context;
     ItemClickListener listener;
+    AppDataBase appDataBase;
 
-    public FirstAdapter(List<Notes> list, Context context) {
+    public FirstAdapter(List<Notes> list, Context context, AppDataBase appDataBase) {
+        this.appDataBase = appDataBase;
         this.list = list;
         this.context = context;
     }
@@ -86,11 +89,13 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            /*if (item.getItemId() == R.id.delete) {
+            if (item.getItemId() == R.id.delete) {
+                appDataBase.getNotesDao().delete(list.get(getAdapterPosition()));
+                appDataBase.getNotesDao().update(list.get(getAdapterPosition()));
                 list.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
                 return true;
-            }*/
+            }
             return false;
         }
     }

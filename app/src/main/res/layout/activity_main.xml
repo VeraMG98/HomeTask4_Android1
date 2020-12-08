@@ -20,14 +20,19 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_save2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:backgroundTint="#FFA500"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:src="@drawable/add_items"
         android:onClick="onClickButtonAddActivity"
         android:contentDescription="@string/todo"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        tools:targetApi="lollipop"
+        android:layout_marginEnd="16dp" />
 
 </RelativeLayout>

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
                 .build();
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
         list = dataBase.getNotesDao().getAllElements();
-        firstAdapter = new FirstAdapter(list,this);
+        firstAdapter = new FirstAdapter(list,this, dataBase);
         binding.recycler.setAdapter(firstAdapter);
         firstAdapter.setOnClickListener(this);
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.recycler);

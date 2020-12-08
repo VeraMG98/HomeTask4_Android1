@@ -64,7 +64,6 @@ public class AddActivity extends AppCompatActivity{
                     binding.dateAddNew.getText().toString());
             dataBase.getNotesDao().insertAll(notes);
             dataBase.getNotesDao().update(notes);
-            binding.btnSave.setVisibility(View.GONE);
             Toast.makeText(AddActivity.this, "Сохранено", Toast.LENGTH_SHORT)
                     .show();
         }
@@ -84,6 +83,14 @@ public class AddActivity extends AppCompatActivity{
         Intent intent = new Intent(AddActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void onClickShareIcon(View view) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, binding.editNewElement.getText().toString() +
+                "\n" + binding.addNewNote.getText().toString());
+        startActivity(intent);
     }
 }
 

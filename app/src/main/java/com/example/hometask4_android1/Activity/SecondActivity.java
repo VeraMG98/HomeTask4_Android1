@@ -55,7 +55,6 @@ public class SecondActivity extends AppCompatActivity {
                 binding.addNewNote1.getText().toString(),
                 binding.dateAddNew1.getText().toString());
         dataBase.getNotesDao().update(notes);
-        binding.btnSave1.setVisibility(View.GONE);
         Toast.makeText(SecondActivity.this, "Сохранено", Toast.LENGTH_SHORT)
                 .show();
         intent.putExtra(KEY, notes);
@@ -87,5 +86,13 @@ public class SecondActivity extends AppCompatActivity {
 
     public void onClickBackMain(View view) {
         finish();
+    }
+
+    public void onClickShareIconSecond(View view) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, binding.editNewElement1.getText().toString() +
+                "\n" + binding.addNewNote1.getText().toString());
+        startActivity(intent);
     }
 }
