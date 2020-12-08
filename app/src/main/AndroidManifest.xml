@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeTask4_Android1">
+        <activity android:name=".Activity.AddActivity"></activity>
         <activity android:name=".Activity.SecondActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>

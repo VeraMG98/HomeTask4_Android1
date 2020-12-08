@@ -1,6 +1,7 @@
 package com.example.hometask4_android1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -8,57 +9,63 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.hometask4_android1.DB.AppDataBase;
 import com.example.hometask4_android1.Model.Notes;
-import com.example.hometask4_android1.R;
+import com.example.hometask4_android1.databinding.ActivitySecondBinding;
 
 import java.util.Calendar;
 
 public class SecondActivity extends AppCompatActivity {
+    ActivitySecondBinding binding;
+    AppDataBase dataBase;
     public Calendar date;
     public static String dateText;
-    public EditText editText, editText2;
-    public TextView textViewDate;
     public static String KEY = "key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        binding = ActivitySecondBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         init();
         setInitialDate();
         Intent intent = getIntent();
         if (intent != null) {
             Notes notes = (Notes) intent.getSerializableExtra(MainActivity.KEY);
-            editText2.setText(notes.getTitle());
-            editText.setText(notes.getNote());
-            textViewDate.setText(notes.getDate());
+            binding.editNewElement1.setText(notes.getTitle());
+            binding.addNewNote1.setText(notes.getNote());
+            binding.dateAddNew1.setText(notes.getDate());
         }
     }
 
     private void init() {
-        editText2 = findViewById(R.id.edit_title);
-        editText = findViewById(R.id.edit_theme);
-        textViewDate = findViewById(R.id.text_for_date);
+        dataBase = Room.databaseBuilder(this, AppDataBase.class, "mybd")
+                .allowMainThreadQueries()
+                .build();
         date = Calendar.getInstance();
     }
 
     public void onClickButtonOkSecondActivity(View view) {
-        Intent intent = new Intent();
-        Notes notes = new Notes(editText2.getText().toString(),
-                editText.getText().toString(),
-                textViewDate.getText().toString());
+        Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+        Notes notes = new Notes(
+                binding.editNewElement1.getText().toString(),
+                binding.addNewNote1.getText().toString(),
+                binding.dateAddNew1.getText().toString());
+        dataBase.getNotesDao().update(notes);
+        binding.btnSave1.setVisibility(View.GONE);
+        Toast.makeText(SecondActivity.this, "Сохранено", Toast.LENGTH_SHORT)
+                .show();
         intent.putExtra(KEY, notes);
         setResult(RESULT_OK, intent);
-        finish();
     }
 
     private void setInitialDate() {
         dateText = DateUtils.formatDateTime(this, date.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
-        textViewDate.setText(dateText);
+        binding.dateAddNew1.setText(dateText);
     }
 
     public void onClickCalendarIcon(View view) {
@@ -77,4 +84,8 @@ public class SecondActivity extends AppCompatActivity {
             setInitialDate();
         }
     };
+
+    public void onClickBackMain(View view) {
+        finish();
+    }
 }

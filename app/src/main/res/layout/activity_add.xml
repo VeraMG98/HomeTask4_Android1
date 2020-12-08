@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SecondActivity">
+    tools:context=".Activity.AddActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar1"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/back_main1"
+                android:id="@+id/back_main"
                 android:src="@drawable/menu_back_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,26 +28,26 @@
 
     <RelativeLayout
         android:padding="16dp"
-        android:layout_below="@id/toolbar1"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/l11"
+            android:id="@+id/l1"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/edit_new_element1"
+            <EditText
+                android:id="@+id/edit_new_element"
                 android:layout_width="0dp"
                 android:layout_weight="0.9"
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:id="@+id/calendar_add_item1"
-                android:onClick="onClickCalendarIcon"
+                android:id="@+id/calendar_add_item"
+                android:onClick="onClickCalendarForAddActivity"
                 android:src="@drawable/calengar"
                 android:layout_width="0dp"
                 android:layout_weight="0.1"
@@ -56,15 +56,15 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/add_new_note1"
+            android:id="@+id/add_new_note"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/l11"
+            android:layout_below="@id/l1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/date_add_new1"
-            android:layout_below="@id/add_new_note1"
+            android:id="@+id/date_add_new"
+            android:layout_below="@id/add_new_note"
             android:layout_marginTop="5dp"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
@@ -72,17 +72,16 @@
             android:layout_alignParentRight="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_save1"
+            android:id="@+id/btn_save"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:src="@drawable/add_items_ok"
-            android:onClick="onClickButtonOkSecondActivity"
+            android:onClick="onClickButtonAddActivity"
             android:contentDescription="@string/todo"
             android:layout_alignParentRight="true" />
 
     </RelativeLayout>
-
 </RelativeLayout>

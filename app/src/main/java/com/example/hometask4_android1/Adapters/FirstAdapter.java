@@ -86,11 +86,11 @@ public class FirstAdapter extends RecyclerView.Adapter<FirstAdapter.FirstViewHol
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            if (item.getItemId() == R.id.delete) {
+            /*if (item.getItemId() == R.id.delete) {
                 list.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
                 return true;
-            }
+            }*/
             return false;
         }
     }
