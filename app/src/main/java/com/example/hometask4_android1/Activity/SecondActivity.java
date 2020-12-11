@@ -19,7 +19,6 @@ import java.util.Calendar;
 
 public class SecondActivity extends AppCompatActivity {
     ActivitySecondBinding binding;
-    AppDataBase dataBase;
     public Calendar date;
     public static String dateText;
     public static String KEY = "key";
@@ -42,9 +41,6 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void init() {
-        dataBase = Room.databaseBuilder(this, AppDataBase.class, "mybd")
-                .allowMainThreadQueries()
-                .build();
         date = Calendar.getInstance();
     }
 
@@ -54,7 +50,7 @@ public class SecondActivity extends AppCompatActivity {
                 binding.editNewElement1.getText().toString(),
                 binding.addNewNote1.getText().toString(),
                 binding.dateAddNew1.getText().toString());
-        dataBase.getNotesDao().update(notes);
+        MainActivity.dataBase.getNotesDao().update(notes);
         Toast.makeText(SecondActivity.this, "Сохранено", Toast.LENGTH_SHORT)
                 .show();
         intent.putExtra(KEY, notes);

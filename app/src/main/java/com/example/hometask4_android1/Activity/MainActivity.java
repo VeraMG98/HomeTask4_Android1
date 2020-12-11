@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener {
-    AppDataBase dataBase;
+    public static AppDataBase dataBase;
     private ActivityMainBinding binding;
     public FirstAdapter firstAdapter;
     public List<Notes> list;

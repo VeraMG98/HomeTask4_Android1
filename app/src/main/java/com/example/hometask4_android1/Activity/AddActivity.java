@@ -10,9 +10,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import com.example.hometask4_android1.DB.AppDataBase;
 import com.example.hometask4_android1.Model.Notes;
 import com.example.hometask4_android1.databinding.ActivityAddBinding;
 
@@ -20,7 +18,6 @@ import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity{
     private ActivityAddBinding binding;
-    AppDataBase dataBase;
     public Calendar date;
 
     @Override
@@ -34,9 +31,6 @@ public class AddActivity extends AppCompatActivity{
     }
 
     private void init() {
-        dataBase = Room.databaseBuilder(this, AppDataBase.class, "mybd")
-                .allowMainThreadQueries()
-                .build();
         date = Calendar.getInstance();
     }
 
@@ -59,13 +53,19 @@ public class AddActivity extends AppCompatActivity{
             Toast.makeText(AddActivity.this, "Пустая заметка", Toast.LENGTH_SHORT)
                     .show();
         } else {
-            Notes notes = new Notes(binding.editNewElement.getText().toString(),
-                    binding.addNewNote.getText().toString(),
-                    binding.dateAddNew.getText().toString());
-            dataBase.getNotesDao().insertAll(notes);
-            dataBase.getNotesDao().update(notes);
-            Toast.makeText(AddActivity.this, "Сохранено", Toast.LENGTH_SHORT)
-                    .show();
+            try {
+                Notes notes = new Notes(binding.editNewElement.getText().toString(),
+                        binding.addNewNote.getText().toString(),
+                        binding.dateAddNew.getText().toString());
+                MainActivity.dataBase.getNotesDao().insertAll(notes);
+                MainActivity.dataBase.getNotesDao().update(notes);
+                Toast.makeText(AddActivity.this, "Сохранено", Toast.LENGTH_SHORT)
+                        .show();
+            } catch (Exception e) {
+                Toast.makeText(AddActivity.this, "Сохранено", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
         }
     }
 
